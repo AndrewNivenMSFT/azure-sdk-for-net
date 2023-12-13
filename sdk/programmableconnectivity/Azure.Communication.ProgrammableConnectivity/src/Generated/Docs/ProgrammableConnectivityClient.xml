@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="VerifyAsync(string,LocationVerifyRequest,CancellationToken)">
+      <example>
+This sample shows how to call VerifyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+LocationVerifyRequest locationVerifyRequest = new LocationVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"), 123.45F, 123.45F, 1234, new LocationDevice());
+Response<LocationVerifyResponse> response = await client.VerifyAsync("<apcGatewayId>", locationVerifyRequest);
+]]></code>
+This sample shows how to call VerifyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+LocationVerifyRequest locationVerifyRequest = new LocationVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"), 123.45F, 123.45F, 1234, new LocationDevice
+{
+    NetworkAccessIdentifier = "<networkAccessIdentifier>",
+    PhoneNumber = "<phoneNumber>",
+    Ipv4Address = new Ipv4Address("<ipv4>", 1234),
+    Ipv6Address = new Ipv6Address("<ipv6>", 1234),
+});
+Response<LocationVerifyResponse> response = await client.VerifyAsync("<apcGatewayId>", locationVerifyRequest);
+]]></code></example>
+    </member>
+    <member name="Verify(string,LocationVerifyRequest,CancellationToken)">
+      <example>
+This sample shows how to call Verify.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+LocationVerifyRequest locationVerifyRequest = new LocationVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"), 123.45F, 123.45F, 1234, new LocationDevice());
+Response<LocationVerifyResponse> response = client.Verify("<apcGatewayId>", locationVerifyRequest);
+]]></code>
+This sample shows how to call Verify with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+LocationVerifyRequest locationVerifyRequest = new LocationVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"), 123.45F, 123.45F, 1234, new LocationDevice
+{
+    NetworkAccessIdentifier = "<networkAccessIdentifier>",
+    PhoneNumber = "<phoneNumber>",
+    Ipv4Address = new Ipv4Address("<ipv4>", 1234),
+    Ipv6Address = new Ipv6Address("<ipv6>", 1234),
+});
+Response<LocationVerifyResponse> response = client.Verify("<apcGatewayId>", locationVerifyRequest);
+]]></code></example>
+    </member>
+    <member name="VerifyAsync(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call VerifyAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+    latitude = 123.45F,
+    longitude = 123.45F,
+    accuracy = 1234,
+    locationDevice = new object(),
+});
+Response response = await client.VerifyAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code>
+This sample shows how to call VerifyAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+    latitude = 123.45F,
+    longitude = 123.45F,
+    accuracy = 1234,
+    locationDevice = new
+    {
+        networkAccessIdentifier = "<networkAccessIdentifier>",
+        phoneNumber = "<phoneNumber>",
+        ipv4Address = new
+        {
+            ipv4 = "<ipv4>",
+            port = 1234,
+        },
+        ipv6Address = new
+        {
+            ipv6 = "<ipv6>",
+            port = 1234,
+        },
+    },
+});
+Response response = await client.VerifyAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code></example>
+    </member>
+    <member name="Verify(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Verify and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+    latitude = 123.45F,
+    longitude = 123.45F,
+    accuracy = 1234,
+    locationDevice = new object(),
+});
+Response response = client.Verify("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code>
+This sample shows how to call Verify with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+    latitude = 123.45F,
+    longitude = 123.45F,
+    accuracy = 1234,
+    locationDevice = new
+    {
+        networkAccessIdentifier = "<networkAccessIdentifier>",
+        phoneNumber = "<phoneNumber>",
+        ipv4Address = new
+        {
+            ipv4 = "<ipv4>",
+            port = 1234,
+        },
+        ipv6Address = new
+        {
+            ipv6 = "<ipv6>",
+            port = 1234,
+        },
+    },
+});
+Response response = client.Verify("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code></example>
+    </member>
+    <member name="RetrieveAsync(string,DeviceNetworkIdentifier,CancellationToken)">
+      <example>
+This sample shows how to call RetrieveAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+DeviceNetworkIdentifier deviceNetworkIdentifier = new DeviceNetworkIdentifier("<identifierType>", "<deviceIdentifier>");
+Response<Network> response = await client.RetrieveAsync("<apcGatewayId>", deviceNetworkIdentifier);
+]]></code>
+This sample shows how to call RetrieveAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+DeviceNetworkIdentifier deviceNetworkIdentifier = new DeviceNetworkIdentifier("<identifierType>", "<deviceIdentifier>");
+Response<Network> response = await client.RetrieveAsync("<apcGatewayId>", deviceNetworkIdentifier);
+]]></code></example>
+    </member>
+    <member name="Retrieve(string,DeviceNetworkIdentifier,CancellationToken)">
+      <example>
+This sample shows how to call Retrieve.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+DeviceNetworkIdentifier deviceNetworkIdentifier = new DeviceNetworkIdentifier("<identifierType>", "<deviceIdentifier>");
+Response<Network> response = client.Retrieve("<apcGatewayId>", deviceNetworkIdentifier);
+]]></code>
+This sample shows how to call Retrieve with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+DeviceNetworkIdentifier deviceNetworkIdentifier = new DeviceNetworkIdentifier("<identifierType>", "<deviceIdentifier>");
+Response<Network> response = client.Retrieve("<apcGatewayId>", deviceNetworkIdentifier);
+]]></code></example>
+    </member>
+    <member name="RetrieveAsync(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call RetrieveAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    deviceIdentifier = "<deviceIdentifier>",
+});
+Response response = await client.RetrieveAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("networkCode").ToString());
+]]></code>
+This sample shows how to call RetrieveAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    deviceIdentifier = "<deviceIdentifier>",
+});
+Response response = await client.RetrieveAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("networkCode").ToString());
+]]></code></example>
+    </member>
+    <member name="Retrieve(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Retrieve and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    deviceIdentifier = "<deviceIdentifier>",
+});
+Response response = client.Retrieve("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("networkCode").ToString());
+]]></code>
+This sample shows how to call Retrieve with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    deviceIdentifier = "<deviceIdentifier>",
+});
+Response response = client.Retrieve("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("networkCode").ToString());
+]]></code></example>
+    </member>
+    <member name="VerifyAsync(string,NumberVerifyRequest,CancellationToken)">
+      <example>
+This sample shows how to call VerifyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NumberVerifyRequest numberVerifyRequest = new NumberVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<NumberVerifyResponse> response = await client.VerifyAsync("<apcGatewayId>", numberVerifyRequest);
+]]></code>
+This sample shows how to call VerifyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NumberVerifyRequest numberVerifyRequest = new NumberVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"))
+{
+    PhoneNumber = "<phoneNumber>",
+    HashedPhoneNumber = "<hashedPhoneNumber>",
+};
+Response<NumberVerifyResponse> response = await client.VerifyAsync("<apcGatewayId>", numberVerifyRequest);
+]]></code></example>
+    </member>
+    <member name="Verify(string,NumberVerifyRequest,CancellationToken)">
+      <example>
+This sample shows how to call Verify.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NumberVerifyRequest numberVerifyRequest = new NumberVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<NumberVerifyResponse> response = client.Verify("<apcGatewayId>", numberVerifyRequest);
+]]></code>
+This sample shows how to call Verify with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NumberVerifyRequest numberVerifyRequest = new NumberVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"))
+{
+    PhoneNumber = "<phoneNumber>",
+    HashedPhoneNumber = "<hashedPhoneNumber>",
+};
+Response<NumberVerifyResponse> response = client.Verify("<apcGatewayId>", numberVerifyRequest);
+]]></code></example>
+    </member>
+    <member name="VerifyAsync(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call VerifyAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = await client.VerifyAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code>
+This sample shows how to call VerifyAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+    phoneNumber = "<phoneNumber>",
+    hashedPhoneNumber = "<hashedPhoneNumber>",
+});
+Response response = await client.VerifyAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code></example>
+    </member>
+    <member name="Verify(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Verify and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = client.Verify("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code>
+This sample shows how to call Verify with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+    phoneNumber = "<phoneNumber>",
+    hashedPhoneNumber = "<hashedPhoneNumber>",
+});
+Response response = client.Verify("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code></example>
+    </member>
+    <member name="RetrieveAsync(string,NetworkIdentifier,CancellationToken)">
+      <example>
+This sample shows how to call RetrieveAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NetworkIdentifier networkIdentifier = new NetworkIdentifier("<identifierType>", "<identifier>");
+Response<NumberRetrieveResponse> response = await client.RetrieveAsync("<apcGatewayId>", networkIdentifier);
+]]></code>
+This sample shows how to call RetrieveAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NetworkIdentifier networkIdentifier = new NetworkIdentifier("<identifierType>", "<identifier>");
+Response<NumberRetrieveResponse> response = await client.RetrieveAsync("<apcGatewayId>", networkIdentifier);
+]]></code></example>
+    </member>
+    <member name="Retrieve(string,NetworkIdentifier,CancellationToken)">
+      <example>
+This sample shows how to call Retrieve.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NetworkIdentifier networkIdentifier = new NetworkIdentifier("<identifierType>", "<identifier>");
+Response<NumberRetrieveResponse> response = client.Retrieve("<apcGatewayId>", networkIdentifier);
+]]></code>
+This sample shows how to call Retrieve with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+NetworkIdentifier networkIdentifier = new NetworkIdentifier("<identifierType>", "<identifier>");
+Response<NumberRetrieveResponse> response = client.Retrieve("<apcGatewayId>", networkIdentifier);
+]]></code></example>
+    </member>
+    <member name="RetrieveAsync(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call RetrieveAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    identifier = "<identifier>",
+});
+Response response = await client.RetrieveAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("phoneNumber").ToString());
+]]></code>
+This sample shows how to call RetrieveAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    identifier = "<identifier>",
+});
+Response response = await client.RetrieveAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("phoneNumber").ToString());
+]]></code></example>
+    </member>
+    <member name="Retrieve(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Retrieve and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    identifier = "<identifier>",
+});
+Response response = client.Retrieve("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("phoneNumber").ToString());
+]]></code>
+This sample shows how to call Retrieve with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    identifierType = "<identifierType>",
+    identifier = "<identifier>",
+});
+Response response = client.Retrieve("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("phoneNumber").ToString());
+]]></code></example>
+    </member>
+    <member name="RetrieveAsync(string,SimSwapRetrieveRequest,CancellationToken)">
+      <example>
+This sample shows how to call RetrieveAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapRetrieveRequest simSwapRetrieveRequest = new SimSwapRetrieveRequest("<phoneNumber>", new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<SimSwapRetrieveResponse> response = await client.RetrieveAsync("<apcGatewayId>", simSwapRetrieveRequest);
+]]></code>
+This sample shows how to call RetrieveAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapRetrieveRequest simSwapRetrieveRequest = new SimSwapRetrieveRequest("<phoneNumber>", new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<SimSwapRetrieveResponse> response = await client.RetrieveAsync("<apcGatewayId>", simSwapRetrieveRequest);
+]]></code></example>
+    </member>
+    <member name="Retrieve(string,SimSwapRetrieveRequest,CancellationToken)">
+      <example>
+This sample shows how to call Retrieve.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapRetrieveRequest simSwapRetrieveRequest = new SimSwapRetrieveRequest("<phoneNumber>", new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<SimSwapRetrieveResponse> response = client.Retrieve("<apcGatewayId>", simSwapRetrieveRequest);
+]]></code>
+This sample shows how to call Retrieve with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapRetrieveRequest simSwapRetrieveRequest = new SimSwapRetrieveRequest("<phoneNumber>", new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<SimSwapRetrieveResponse> response = client.Retrieve("<apcGatewayId>", simSwapRetrieveRequest);
+]]></code></example>
+    </member>
+    <member name="RetrieveAsync(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call RetrieveAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    phoneNumber = "<phoneNumber>",
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = await client.RetrieveAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("date").ToString());
+]]></code>
+This sample shows how to call RetrieveAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    phoneNumber = "<phoneNumber>",
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = await client.RetrieveAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("date").ToString());
+]]></code></example>
+    </member>
+    <member name="Retrieve(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Retrieve and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    phoneNumber = "<phoneNumber>",
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = client.Retrieve("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("date").ToString());
+]]></code>
+This sample shows how to call Retrieve with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    phoneNumber = "<phoneNumber>",
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = client.Retrieve("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("date").ToString());
+]]></code></example>
+    </member>
+    <member name="VerifyAsync(string,SimSwapVerifyRequest,CancellationToken)">
+      <example>
+This sample shows how to call VerifyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapVerifyRequest simSwapVerifyRequest = new SimSwapVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<SimSwapVerifyResponse> response = await client.VerifyAsync("<apcGatewayId>", simSwapVerifyRequest);
+]]></code>
+This sample shows how to call VerifyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapVerifyRequest simSwapVerifyRequest = new SimSwapVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"))
+{
+    MaxAgeHours = 1234,
+};
+Response<SimSwapVerifyResponse> response = await client.VerifyAsync("<apcGatewayId>", simSwapVerifyRequest);
+]]></code></example>
+    </member>
+    <member name="Verify(string,SimSwapVerifyRequest,CancellationToken)">
+      <example>
+This sample shows how to call Verify.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapVerifyRequest simSwapVerifyRequest = new SimSwapVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"));
+Response<SimSwapVerifyResponse> response = client.Verify("<apcGatewayId>", simSwapVerifyRequest);
+]]></code>
+This sample shows how to call Verify with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+SimSwapVerifyRequest simSwapVerifyRequest = new SimSwapVerifyRequest(new NetworkIdentifier("<identifierType>", "<identifier>"))
+{
+    MaxAgeHours = 1234,
+};
+Response<SimSwapVerifyResponse> response = client.Verify("<apcGatewayId>", simSwapVerifyRequest);
+]]></code></example>
+    </member>
+    <member name="VerifyAsync(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call VerifyAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = await client.VerifyAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code>
+This sample shows how to call VerifyAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    maxAgeHours = 1234,
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = await client.VerifyAsync("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code></example>
+    </member>
+    <member name="Verify(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Verify and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = client.Verify("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code>
+This sample shows how to call Verify with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+ProgrammableConnectivityClient client = new ProgrammableConnectivityClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    maxAgeHours = 1234,
+    networkIdentifier = new
+    {
+        identifierType = "<identifierType>",
+        identifier = "<identifier>",
+    },
+});
+Response response = client.Verify("<apcGatewayId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("verified").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>
